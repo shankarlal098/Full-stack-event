@@ -11,21 +11,25 @@ const main = require('./src/confi/db')
 const cookieParser = require('cookie-parser');
 const codeRouter = require('./src/routes/code');
 const authRouter = require('./src/routes/userAuth');
+const cors = require("cors");
+const CLIENT_URL = process.env.CLIENT_URL;
 
 
-
-const io = new Server(server, {  
+const io = new Server(server, {
     cors: {
-        origin: "http://localhost:5173"
+        origin: CLIENT_URL,
+        credentials: true
     }
 });
 
-
-const cors = require("cors");
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: CLIENT_URL,
     credentials: true
 }));
+
+
+
+
 
 
 
