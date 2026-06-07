@@ -298,11 +298,13 @@ const connectDBs = async () => {
     console.log("Connected to Mongo");
 
 };
+const PORT = process.env.PORT || 10000;
+
 connectDBs()
   .then(() => {
-      server.listen(process.env.PORT, () => {
-          console.log(`Listening on ${process.env.PORT}`);
-      });
+        server.listen(PORT, () => {
+        console.log(`Listening on ${PORT}`);
+    });
   })
   .catch((err) => {
       console.error(err);
