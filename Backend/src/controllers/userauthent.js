@@ -23,8 +23,13 @@ const register = async (req , res) => {
          process.env.JWT_KEY,
          { expiresIn: 60 * 60 }  //jwt to time isliye de rha taki redis ke saym payload se expire time nikal sake
       );
-      res.cookie('token' , token , { maxAge: 60 * 60 * 1000 });
- 
+     res.cookie('token', token, {
+        httpOnly: true,
+        secure: true,        // required for HTTPS (Render)
+        sameSite: "none",    // 🔥 CRITICAL FOR CROSS DOMAIN
+        maxAge: 60 * 60 * 1000
+      });
+      
 
        
       const reply = {
@@ -74,7 +79,13 @@ const login = async (req , res) => {
          emailId : user.emailId,
          _id : user._id 
       }
-      res.cookie('token' , token , { maxAge: 60 * 60 * 1000 });
+      res.cookie('token', token, {
+          httpOnly: true,
+          secure: true,        // required for HTTPS (Render)
+          sameSite: "none",    // 🔥 CRITICAL FOR CROSS DOMAIN
+          maxAge: 60 * 60 * 1000
+        });
+
       res.status(200).json({
           user:reply,
           message : "Loggin Successfully"
@@ -182,8 +193,6 @@ const forgotPassword = async (req, res) => {
     });
   }
 };
-
-
 
 const resetPassword = async (req, res) => {
   try {
