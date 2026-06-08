@@ -80,7 +80,7 @@ function Signup() {
 
           {error && (
             <p className="text-error text-center mb-3">
-              {"Pass Must Contain Upper,Lower,Number,SpecialChar(@ , # ..)"}
+              {error.message ||"Something went wrong. Please try again."}
             </p>
           )}
 
